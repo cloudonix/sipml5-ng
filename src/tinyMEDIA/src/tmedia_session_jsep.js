@@ -791,6 +791,10 @@ tmedia_session_jsep01.prototype.__get_lo = function () {
             this.ao_webrtc_rtcconfiguration
         );
 
+        if(!o_RTCConfiguration.iceServers) {
+            //we must always provide a "sequence type" for our ice servers when calling RTCPeerConnection
+            o_RTCConfiguration.iceServers = [];
+        }
         this.o_pc = new window.RTCPeerConnection(o_RTCConfiguration, o_constraints);
 
         this.o_pc.onicecandidate = tmedia_session_jsep01.mozThis ? tmedia_session_jsep01.onIceCandidate : function (o_event) { tmedia_session_jsep01.onIceCandidate(o_event, This); };

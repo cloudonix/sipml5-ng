@@ -2131,6 +2131,9 @@ function shimRTCIceServerUrls(window) {
         }
       }
       pcConfig.iceServers = newIceServers;
+    } else if (pcConfig) {
+      //This handles the case where the user explicitly configured no iceServers so pcConfig.iceServers is null
+      pcConfig.iceServers = []; //we ensure the pcConfig.iceServers is a sequence type
     }
     return new OrigPeerConnection(pcConfig, pcConstraints);
   };
